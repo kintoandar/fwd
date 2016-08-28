@@ -1,0 +1,32 @@
+language: go
+
+go:
+  - tip
+
+env:
+  - PATH=/home/travis/gopath/bin:$PATH
+
+before_install:
+  - go get github.com/mitchellh/gox
+  - go get github.com/golang/lint/golint
+
+install:
+  - go get -t
+  - go build
+
+script:
+  - go vet ./...
+  - golint ./...
+
+after_success:
+  - gox -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
+
+deploy:
+  skip_cleanup: true
+  file: .bintray.json
+  provider: bintray
+  user: kintoandar
+  key:
+    secure: qQhey1OmUotAYFIghHFmUNBmB3UpzGmrTYVtuh17e9jGtpxnZ7bWPWsxwouBEmfavGljMg8lo9lm5LcIF+fRHlNSmh7GCTqMxfCiihFgVWwW5u6JVIhwvtFaG3WS3PqcqRkvka+//UveU4mlsgEEmXvjeCfHCShCc/5PP5e6+uZDbOSb6kq6mglptTLaM+DOXnriq+s0T+LOcTzO9mztltSJzoLmn8G3KEbrmPIsaBa/0D1ImE3dxKeeMu4UCmD3D5xbLIdnM+Tg+IorQdGvjALrqxchR9VNFU/bL9dTj1qhoRmLVeBTO1R3hFQjsmcUKw3lTkJycEMgmWHTqog8KFFr9nXRKBSKIPaCtErBjWFtQO+/eEpnivONooXIfBayqMWcyXZ6PDAIeZthGNY8DqRotx6SsfJV+8F9vzorh34eQ4+yEhi9lsXcClxocZNbdlPo026afg/Ud+QiYsFIZq3xkP5yGe0DTB1xAuMULSFNzKVWjQ7mJx7t8tQ5JtZjVFE0w9QT6cUnaWEyv/Mtryq9MB5UHjr1KuIcBmBeWmW97mCbK6b67iDPZbVA01bF9f3l/zJrHhjLVXkCVC19P00w4zjT5N/paoW7zhmqVtx2vUm9OMTgnRilI2LYQqCzujP6CoNaDefXGZLZXSbgsPJVHkj+x7tUmSkTLGX0FY0=
+  on:
+    tags: true

@@ -1,0 +1,25 @@
+{
+    "package": {
+        "name": "auto-upload",
+        "repo": "fwd",
+        "subject": "kintoandar",
+        "desc": "Automatic publish",
+        "website_url": "https://blog.kintoandar.com/",
+        "licenses": ["MIT"],
+        "labels": ["tcp", "udp", "golang", "go", "network"],
+        "public_download_numbers": false,
+        "public_stats": false,
+    },
+
+    "version": {
+        "name": "0.1.0",
+        "desc": "The little forwarder that could",
+        "gpgSign": false
+    },
+
+    "files":
+        [
+        {"includePattern": "dist/(.*)", "uploadPattern": "/$1"}
+        ],
+    "publish": true
+}
