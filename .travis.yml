@@ -20,6 +20,7 @@ script:
 
 after_success:
   - gox -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
+  - cd dist ; for I in $(ls *) ; do md5sum $I > $I.md5 ; done ; cd -
 
 deploy:
   skip_cleanup: true
