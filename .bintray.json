@@ -5,6 +5,7 @@
     "subject": "kintoandar",
     "desc": "Automatic publish",
     "website_url": "https://blog.kintoandar.com/",
+    "vcs_url": "https://github.com/kintoandar/fwd.git",
     "licenses": [
       "MIT"
     ],
@@ -26,7 +27,7 @@
   "files": [
     {
       "includePattern": "dist/(.*)",
-      "uploadPattern": "/$1"
+      "uploadPattern": "/0.1.0/$1"
     }
   ],
   "publish": true
