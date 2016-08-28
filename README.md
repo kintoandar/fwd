@@ -1,9 +1,32 @@
+[![Travis](https://img.shields.io/travis/kintoandar/fwd.svg)](https://travis-ci.org/kintoandar/fwd)
+
+Table of Contents
+=================
+
+  * [fwd \- The little forwarder that could](#fwd---the-little-forwarder-that-could)
+    * [Introduction](#introduction)
+    * [Demo](#demo)
+    * [Install](#install)
+      * [Binary releases](#binary-releases)
+      * [Go tool](#go-tool)
+    * [Usage](#usage)
+  * [Credits](#credits)
+
 # fwd - The little forwarder that could
 
 ## Introduction
 `fwd` is a TCP/UDP forwarder written in golang
 
+## Demo
+
+![demo](https://docs.google.com/uc?id=0B-SEc73VBiUwSXdFUm1aN2RNWXc)
+
 ## Install
+### Binary releases
+Prebuilt binaries for several operating systems and architectures:
+[![bintray](https://lh3.googleusercontent.com/-SFdJcEHQ0gM/AAAAAAAAAAI/AAAAAAAAAQc/_4g1vawX-FU/s120-c/photo.jpg)](https://dl.bintray.com/kintoandar/fwd/)
+
+### Go tool
 ```
 go get github.com/kintoandar/fwd
 go install github.com/kintoandar/fwd
