@@ -64,7 +64,8 @@ func tcpStart(from string, to string) {
 
 	fmt.Printf("Forwarding %s traffic from '%v' to '%v'\n", proto, localAddress, remoteAddress)
 	color.Set(color.FgYellow)
-	fmt.Println("<CTRL+C> to exit\n")
+	fmt.Println("<CTRL+C> to exit")
+	fmt.Println()
 	color.Unset()
 
 	for {
@@ -94,7 +95,8 @@ func udpStart(from string, to string) {
 
 	fmt.Printf("Forwarding %s traffic from '%v' to '%v'\n", proto, localAddress, remoteAddress)
 	color.Set(color.FgYellow)
-	fmt.Println("<CTRL+C> to exit\n")
+	fmt.Println("<CTRL+C> to exit")
+	fmt.Println()
 	color.Unset()
 
 	buf := make([]byte, 512)
