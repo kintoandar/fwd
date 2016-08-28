@@ -18,14 +18,24 @@ Table of Contents
 `fwd` is a TCP/UDP forwarder written in golang
 
 ## Demo
+```
+                              +---------+                         +---------+
+               127.0.0.1:8000 |         |         172.28.128.3:80 |         |
+curl -----------------------> |   fwd   +-----------------------> |   web   |
+                              |         | 172.28.128.1            |         |
+                              +---------+                         +---------+
 
+
+```
 ![demo](https://docs.google.com/uc?id=0B-SEc73VBiUwSXdFUm1aN2RNWXc)
 
 ## Install
-### Binary releases
-Prebuilt binaries for several operating systems and architectures:
+Get the binaries or build it yourself
 
-[![bintray](https://lh3.googleusercontent.com/-SFdJcEHQ0gM/AAAAAAAAAAI/AAAAAAAAAQc/_4g1vawX-FU/s120-c/photo.jpg)](https://dl.bintray.com/kintoandar/fwd/)
+### Binary releases
+Download prebuilt binaries for several platforms and architectures:
+
+[![bintray](https://docs.google.com/uc?id=0B-SEc73VBiUwQ0NNLWRXdUN1M3c)](https://dl.bintray.com/kintoandar/fwd/) [Bintray](https://dl.bintray.com/kintoandar/fwd/)
 
 ### Go tool
 ```
