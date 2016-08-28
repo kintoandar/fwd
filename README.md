@@ -24,6 +24,7 @@ Table of Contents
 ## Install
 ### Binary releases
 Prebuilt binaries for several operating systems and architectures:
+
 [![bintray](https://lh3.googleusercontent.com/-SFdJcEHQ0gM/AAAAAAAAAAI/AAAAAAAAAQc/_4g1vawX-FU/s120-c/photo.jpg)](https://dl.bintray.com/kintoandar/fwd/)
 
 ### Go tool
