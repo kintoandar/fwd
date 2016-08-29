@@ -1,32 +1,32 @@
-[![Travis](https://img.shields.io/travis/kintoandar/fwd.svg)](https://travis-ci.org/kintoandar/fwd)
-
 Table of Contents
 =================
 
+  * [Table of Contents](#table-of-contents)
   * [fwd \- The little forwarder that could](#fwd---the-little-forwarder-that-could)
-    * [Introduction](#introduction)
+    * [About](#about)
     * [Demo](#demo)
     * [Install](#install)
       * [Binary releases](#binary-releases)
       * [Go tool](#go-tool)
     * [Usage](#usage)
-  * [Credits](#credits)
+    * [Credits](#credits)
 
 # fwd - The little forwarder that could
+[![Travis](https://img.shields.io/travis/kintoandar/fwd.svg)](https://travis-ci.org/kintoandar/fwd)
 
-## Introduction
-`fwd` is a TCP/UDP forwarder written in golang
+## About
+`fwd` is a network port forwarder written in golang
 
 ## Demo
 ```
-                        +---------+                            +---------+
-         127.0.0.1:8000 |         |            172.28.128.3:80 |         |
-curl +----------------> |   fwd   | +------------------------> |   web   |
-                        |         | 172.28.128.1               |         |
-                        +---------+                            +---------+
+                             +---------+                             +---------+
+           192.168.1.99:8000 |         |             172.28.128.3:80 |         |
+curl +---------------------> |   fwd   | +-------------------------> |   web   |
+                             |         | 172.28.128.1                |         |
+                             +---------+                             +---------+
 ```
 
-![demo](https://docs.google.com/uc?id=0B-SEc73VBiUwSXdFUm1aN2RNWXc)
+![demo](https://docs.google.com/uc?id=0B-SEc73VBiUwN0RheHVYQ3RlbW8)
 
 ## Install
 Get the binaries or build it yourself
@@ -71,5 +71,5 @@ COPYRIGHT:
    MIT License
 ```
 
-# Credits
+## Credits
 Made with ♥️ by [kintoandar](https://blog.kintoandar.com)
