@@ -19,13 +19,15 @@ Table of Contents
 ## About
 `fwd` is a network port forwarder written in golang.
 
+It's cross platform, supports multiple architectures and it's dead simple to use.
+
 Read all about it in this [article](https://blog.kintoandar.com/2016/08/fwd-the-little-forwarder-that-could.html).
 
 ## Use Cases
 ### fwd ♥️ ngrok
 I must admit `ngrok` was an huge inspiration for `fwd`. If you don't know the tool you should definitely check out [this talk](https://www.youtube.com/watch?v=F_xNOVY96Ng) from [@inconshreveable](https://twitter.com/inconshreveable).
 
-This tool combo (fwd + ngrok) allows some wicked mischief, like taking [firewall hole punching](https://en.wikipedia.org/wiki/Hole_punching_(networking)) to another level! And the setup is dead easy.
+This tool combo (fwd + ngrok) allows some wicked mischief, like taking [firewall hole punching](https://en.wikipedia.org/wiki/Hole_punching_(networking)) to another level! And the setup is trivial.
 
 `ngrok` allows to expose a local port on a public endpoint and `fwd` allows to connect a local port to a remote endpoint. You see where I'm heading with this... With both tools you can connect a public endpoint to a remote port as long as you have access to it.
 
