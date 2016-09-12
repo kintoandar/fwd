@@ -31,11 +31,11 @@ func fwd(src net.Conn, remote string, proto string) {
 	errHandler(err)
 	go func() {
 		_, err = io.Copy(src, dst)
-		errHandler(err)
+		errPrinter(err)
 	}()
 	go func() {
 		_, err = io.Copy(dst, src)
-		errHandler(err)
+		errPrinter(err)
 	}()
 }
 
@@ -45,6 +45,15 @@ func errHandler(err error) {
 		fmt.Fprintf(os.Stderr, "[Error] %s\n", err.Error())
 		color.Unset()
 		os.Exit(1)
+	}
+}
+
+// TODO: merge error handling functions
+func errPrinter(err error) {
+	if err != nil {
+		color.Set(color.FgRed)
+		fmt.Fprintf(os.Stderr, "[Error] %s\n", err.Error())
+		color.Unset()
 	}
 }
 
