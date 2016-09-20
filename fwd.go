@@ -9,6 +9,7 @@ import (
 	"io"
 	"os/signal"
 	"syscall"
+	"runtime"
 )
 
 func getLocalAddrs() ([]net.IP, error) {
@@ -165,6 +166,10 @@ func main() {
 			Name:  "udp, u",
 			Usage: "enable udp forwarding (tcp by default)",
 		},
+		cli.BoolFlag{
+			Name:  "build, b",
+			Usage: "build information",
+		},
 	}
 	app.Action = func(c *cli.Context) error {
 		defer color.Unset()
@@ -178,6 +183,11 @@ func main() {
 				fmt.Println(ip)
 			}
 			return nil
+		} else if c.Bool("build") {
+			fmt.Println("Built with " + runtime.Version() + " for " + runtime.GOOS + "/" + runtime.GOARCH)
+			color.Unset()
+			return nil
+
 		} else if c.String("to") == "" {
 			color.Unset()
 			cli.ShowAppHelp(c)
