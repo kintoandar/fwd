@@ -136,7 +136,7 @@ func ctrlc() {
 func main() {
 	app := cli.NewApp()
 	app.Name = "fwd"
-	app.Version = "0.1.2"
+	app.Version = "1.0.0"
 	app.Usage = "The little forwarder that could"
 	app.UsageText = "fwd --from localhost:2222 --to 192.168.1.254:22"
 	app.Copyright = "MIT License"
