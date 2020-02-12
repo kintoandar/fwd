@@ -66,3 +66,4 @@ _testmain.go
 *.test
 *.prof
 
+fwd
