@@ -8,10 +8,10 @@ env:
 
 before_install:
   - go get github.com/mitchellh/gox
-  - go get github.com/golang/lint/golint
+  - go get golang.org/x/lint/golint
 
 install:
-  - go get -t
+  - go mod download
   - go build
 
 script:
