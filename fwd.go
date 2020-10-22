@@ -1,14 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/urfave/cli"
+	"io"
 	"net"
 	"os"
-	"io"
-	"os/signal"
-	"syscall"
 	"runtime"
 )
 
@@ -72,10 +71,8 @@ func tcpStart(from string, to string) {
 
 	defer listener.Close()
 
+	color.Set(color.FgGreen)
 	fmt.Printf("Forwarding %s traffic from '%v' to '%v'\n", proto, localAddress, remoteAddress)
-	color.Set(color.FgYellow)
-	fmt.Println("<CTRL+C> to exit")
-	fmt.Println()
 	color.Unset()
 
 	for {
@@ -103,10 +100,8 @@ func udpStart(from string, to string) {
 	errHandler(err)
 	defer dst.Close()
 
+	color.Set(color.FgGreen)
 	fmt.Printf("Forwarding %s traffic from '%v' to '%v'\n", proto, localAddress, remoteAddress)
-	color.Set(color.FgYellow)
-	fmt.Println("<CTRL+C> to exit")
-	fmt.Println()
 	color.Unset()
 
 	buf := make([]byte, 512)
@@ -119,18 +114,6 @@ func udpStart(from string, to string) {
 
 		fmt.Printf("%d bytes forwared\n", rnum)
 	}
-}
-
-func ctrlc() {
-	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
-	go func() {
-		sig := <-sigs
-		color.Set(color.FgGreen)
-		fmt.Println("\nExecution stopped by", sig)
-		color.Unset()
-		os.Exit(0)
-	}()
 }
 
 func main() {
@@ -147,13 +130,13 @@ func main() {
 		},
 	}
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
+		cli.StringSliceFlag{
 			Name:   "from, f",
-			Value:  "127.0.0.1:8000",
+			Value:  &cli.StringSlice{},
 			EnvVar: "FWD_FROM",
 			Usage:  "source HOST:PORT",
 		},
-		cli.StringFlag{
+		cli.StringSliceFlag{
 			Name:   "to, t",
 			EnvVar: "FWD_TO",
 			Usage:  "destination HOST:PORT",
@@ -193,14 +176,42 @@ func main() {
 			cli.ShowAppHelp(c)
 			return nil
 		} else {
-			ctrlc()
-			if c.Bool("udp") {
-				udpStart(c.String("from"), c.String("to"))
+			fromSl := c.StringSlice("from")
+			toSl := c.StringSlice("to")
 
-			} else {
-				tcpStart(c.String("from"), c.String("to"))
+			if len(fromSl) < len(toSl) {
+				return fmt.Errorf("invalid forwarding rules, [from] addresses are less than [to] addresses")
 			}
-			return nil
+
+			if len(fromSl) > len(toSl) {
+				// in that case, we will pad toSl with the last one in order to match with fromSl length
+				for {
+					toSl = append(toSl, toSl[len(toSl)-1])
+					if len(fromSl) == len(toSl) {
+						break
+					}
+				}
+			}
+
+			tunnels := make([]*Tunnel, 0)
+			for i := 0; i < len(fromSl); i++ {
+				tunnel := Tunnel{
+					Source: fromSl[i],
+					Addr: toSl[i],
+				}
+
+				if c.Bool("udp") {
+					tunnel.Protocol = protocolUDP
+				} else {
+					tunnel.Protocol = protocolTCP
+				}
+
+				tunnels = append(tunnels, &tunnel)
+			}
+
+			control := NewController(context.Background(), tunnels)
+
+			return control.Run()
 		}
 	}
 	app.Run(os.Args)

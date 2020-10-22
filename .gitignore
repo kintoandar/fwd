@@ -5,6 +5,8 @@
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+.idea/fwd.iml
+.idea/misc.xml
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -13,6 +15,7 @@
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/modules.xml
 
 # Gradle:
 .idea/gradle.xml
@@ -20,6 +23,8 @@
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
+
+.idea
 
 ## File-based project format:
 *.iws
