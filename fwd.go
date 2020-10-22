@@ -6,6 +6,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/urfave/cli"
 	"io"
+	"log"
 	"net"
 	"os"
 	"runtime"
@@ -153,6 +154,10 @@ func main() {
 			Name:  "build, b",
 			Usage: "build information",
 		},
+		cli.StringFlag{
+			Name:  "config, c",
+			Usage: "tunnels config file (YAML format), eg. ./tunnels.yaml",
+		},
 	}
 	app.Action = func(c *cli.Context) error {
 		defer color.Unset()
@@ -176,6 +181,21 @@ func main() {
 			cli.ShowAppHelp(c)
 			return nil
 		} else {
+			tunnels := make([]*Tunnel, 0)
+
+			configFile := c.String("config")
+			if configFile != "" {
+				config, err := readConfig(configFile)
+				if err != nil {
+					// just emit warning
+					log.Printf("WARNING: %s", err.Error())
+				}
+
+				if config != nil {
+					tunnels = config.Tunnels
+				}
+			}
+
 			fromSl := c.StringSlice("from")
 			toSl := c.StringSlice("to")
 
@@ -193,7 +213,6 @@ func main() {
 				}
 			}
 
-			tunnels := make([]*Tunnel, 0)
 			for i := 0; i < len(fromSl); i++ {
 				tunnel := Tunnel{
 					Source: fromSl[i],

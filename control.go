@@ -4,18 +4,40 @@ import (
 	"context"
 	"fmt"
 	"github.com/fatih/color"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"os"
 	"os/signal"
 	"syscall"
 )
 
-const protocolUDP = "upd"
+const protocolUDP = "udp"
 const protocolTCP = "tcp"
 
+type tunnelConfigFile struct {
+	Tunnels []*Tunnel `yaml:"tunnels"`
+}
+
+func readConfig(filename string) (*tunnelConfigFile, error) {
+	yamlFile, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read tunnels config: %s", err)
+	}
+
+	var c tunnelConfigFile
+
+	err = yaml.Unmarshal(yamlFile, &c)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse config file: %s", err)
+	}
+
+	return &c, nil
+}
+
 type Tunnel struct {
-	Addr     string `json:"addr"`
-	Protocol string `json:"protocol"`
-	Source   string `json:"source"`
+	Addr     string `json:"addr" yaml:"addr"`
+	Protocol string `json:"protocol" yaml:"protocol"`
+	Source   string `json:"source" yaml:"source"`
 }
 
 type Controller struct {
@@ -58,6 +80,8 @@ func (c *Controller) handleInterrupt(cancel context.CancelFunc) {
 }
 
 func (c *Controller) Run() error {
+	c.printCtrlC()
+
 	for _, tunnel := range c.Tunnels {
 		switch tunnel.Protocol {
 		case protocolTCP:
@@ -68,8 +92,6 @@ func (c *Controller) Run() error {
 			return fmt.Errorf("unsupported protocol '%s'", tunnel.Protocol)
 		}
 	}
-
-	c.printCtrlC()
 
 	for {
 		select {

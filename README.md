@@ -99,9 +99,10 @@ COMMANDS:
      help, h  Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --from value, -f value  source HOST:PORT (default: "127.0.0.1:8000") [$FWD_FROM]
+   --from value, -f value  source HOST:PORT [$FWD_FROM]
    --to value, -t value    destination HOST:PORT [$FWD_TO]
    --list, -l              list local addresses
+   --config file, -c file  tunnels config file (YAML format), eg. ./tunnels.yaml
    --udp, -u               enable udp forwarding (tcp by default)
    --help, -h              show help
    --version, -v           print the version

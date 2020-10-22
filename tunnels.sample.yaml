@@ -1,0 +1,7 @@
+tunnels:
+- addr: :53100
+  source: 0.something.remote.io:53
+  protocol: udp
+- addr: :54200
+  source: 0.tcp.eu.ngrok.io:19968
+  protocol: tcp
