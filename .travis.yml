@@ -12,14 +12,13 @@ before_install:
 
 install:
   - go mod download
-  - go build
 
 script:
   - go vet ./...
   - golint ./...
 
 after_success:
-  - gox -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}"
+  - gox -output "dist/{{.Dir}}_{{.OS}}_{{.Arch}}" ./...
   - cd dist ; for I in $(ls *) ; do md5sum $I > $I.md5 ; done ; cd -
 
 deploy:

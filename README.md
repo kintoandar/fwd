@@ -83,32 +83,34 @@ go install github.com/kintoandar/fwd
 
 ## Usage
 ```
-NAME:
-   fwd - The little forwarder that could
+usage: fwd [<flags>]
 
-USAGE:
-   fwd --from localhost:2222 --to 192.168.1.254:22
+Name:
 
-VERSION:
-   0.1.0
+  fwd - 🚂 The little forwarder that could
 
-AUTHOR(S):
-   Joel Bastos <kintoandar@gmail.com>
+Author:
 
-COMMANDS:
-     help, h  Shows a list of commands or help for one command
+  Joel Bastos @kintoandar
 
-GLOBAL OPTIONS:
-   --from value, -f value  source HOST:PORT (default: "127.0.0.1:8000") [$FWD_FROM]
-   --to value, -t value    destination HOST:PORT [$FWD_TO]
-   --list, -l              list local addresses
-   --udp, -u               enable udp forwarding (tcp by default)
-   --help, -h              show help
-   --version, -v           print the version
+Example:
 
-COPYRIGHT:
-   MIT License
+  fwd --from localhost:8000 --to example.com:80
+
+Flags:
+  -h, --help                   Show context-sensitive help (also try --help-long and --help-man).
+  -f, --from="127.0.0.1:8000"  Local address to bind port (host:port)
+  -t, --to="example.com:80"    Remote address to forward traffic (host:port)
+  -v, --version                Version details
+  -l, --list                   List local network addresses available
+      --log.level=info         Logging level (error, warn, info, debug)
+      --log.format=logfmt      Logging format (logfmt, json)
+      --config=CONFIG          Configuration file path (overrides all flags)
 ```
+
+### Configuration file
+For multiport forwarding support, please check [the example configuration file](config.yml).
+
 
 ## Credits
 Made with ♥️ by [kintoandar](https://blog.kintoandar.com)
