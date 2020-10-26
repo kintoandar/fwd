@@ -77,8 +77,8 @@ Download prebuilt binaries for several platforms and architectures:
 
 ### Go Tool
 ```
-go get github.com/kintoandar/fwd
-go install github.com/kintoandar/fwd
+go get github.com/kintoandar/fwd/...
+go install github.com/kintoandar/fwd/...
 ```
 
 ## Usage
