@@ -1,0 +1,10 @@
+---
+log.level: "info"
+log.format: "logfmt"
+fwd:
+  - from: "127.0.0.1:8000"
+    to: "www.example.com:80"
+  - from: "127.0.0.1:8001"
+    to: "www.example.com:443"
+  - from: "127.0.0.1:8003"
+    to: "whoami.filippo.io:22"
