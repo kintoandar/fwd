@@ -9,7 +9,7 @@ import (
 var GitCommit string
 
 // Version number.
-const Version = "1.0.1"
+const Version = "1.1.0"
 
 // GoVersion returns the version of the go runtime used to compile the binary.
 var GoVersion = runtime.Version()

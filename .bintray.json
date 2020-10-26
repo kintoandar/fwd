@@ -19,14 +19,14 @@
     "public_stats": false
   },
   "version": {
-    "name": "1.0.1",
+    "name": "1.1.0",
     "desc": "The little forwarder that could",
     "gpgSign": false
   },
   "files": [
     {
       "includePattern": "dist/(.*)",
-      "uploadPattern": "/1.0.1/$1"
+      "uploadPattern": "/1.1.0/$1"
     }
   ],
   "publish": true
