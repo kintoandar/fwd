@@ -1,0 +1,39 @@
+before:
+  hooks:
+    - go mod download
+    - go generate ./...
+builds:
+  - env:
+      - CGO_ENABLED=0
+    flags:
+      - -tags=netgo
+      - -v
+    goos:
+      - linux
+      - windows
+      - darwin
+    main: ./cmd/fwd/main.go
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    format: tar.gz
+checksum:
+  name_template: '{{ .ProjectName }}_checksum.txt'
+  algorithm: sha256
+snapshot:
+  name_template: '{{ .Tag }}-SNAPSHOT-{{ .ShortCommit }}'
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+release:
+  github:
+    owner: kintoandar
+    name: fwd

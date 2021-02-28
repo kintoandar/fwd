@@ -69,11 +69,10 @@ curl +---------------------> |   fwd   | +-------------------------> |   web   |
 ## Install
 Get the binaries or build it yourself.
 
-### Binary Releases
+### Releases
 Download prebuilt binaries for several platforms and architectures:
 
-[![bintray](https://docs.google.com/uc?id=0B-SEc73VBiUwQ0NNLWRXdUN1M3c)](https://dl.bintray.com/kintoandar/fwd/)
-[Bintray](https://dl.bintray.com/kintoandar/fwd/)
+[Releases](https://github.com/kintoandar/fwd/releases)
 
 ### Go Tool
 ```
