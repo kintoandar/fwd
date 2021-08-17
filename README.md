@@ -64,7 +64,7 @@ curl +---------------------> |   fwd   | +-------------------------> |   web   |
                              +---------+                             +---------+
 ```
 
-![demo](https://docs.google.com/uc?id=0B-SEc73VBiUwN0RheHVYQ3RlbW8)
+![demo](docs/fwd_http.gif)
 
 ## Install
 Get the binaries or build it yourself.
